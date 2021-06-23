@@ -43,9 +43,9 @@ func _physics_process(delta):
 		if Input.is_action_pressed(controls[4]):
 			if just_shot >= 50:
 				just_shot = 0
-				#$AnimationPlayer.play('Shooting')
+				$AnimationPlayer.play('shoot')
 				var t = Timer.new()
-				t.set_wait_time(0.4)
+				t.set_wait_time(0.3)
 				t.set_one_shot(true)
 				self.add_child(t)
 				t.start()

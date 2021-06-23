@@ -10,13 +10,18 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
+
 }
 
 [application]
 
 config/name="notdiepio"
-run/main_scene="res://scenes/worldselect.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/icon="res://assets/icon.png"
+
+[display]
+
+window/size/fullscreen=true
 
 [input]
 

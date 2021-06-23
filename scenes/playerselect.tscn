@@ -76,10 +76,10 @@ offset = Vector2( 5, 0 )
 
 [node name="player2select" type="RichTextLabel" parent="."]
 self_modulate = Color( 1, 0.517647, 0.14902, 1 )
-margin_left = 315.755
-margin_top = 133.041
-margin_right = 436.755
-margin_bottom = 184.041
+margin_left = 316.0
+margin_top = 110.0
+margin_right = 452.0
+margin_bottom = 186.0
 custom_fonts/normal_font = SubResource( 1 )
 text = "Player 2 has 
 confirmed!"
@@ -89,10 +89,10 @@ __meta__ = {
 
 [node name="player1select" type="RichTextLabel" parent="."]
 self_modulate = Color( 1, 0.14902, 0.454902, 1 )
-margin_left = 195.49
-margin_top = 133.919
-margin_right = 316.49
-margin_bottom = 186.919
+margin_left = 194.887
+margin_top = 110.0
+margin_right = 315.887
+margin_bottom = 163.0
 custom_fonts/normal_font = SubResource( 2 )
 text = "Player 1 has
 confirmed!"
@@ -115,5 +115,4 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
-
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
