@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/emptyworld.gd" type="Script" id=1]
+[ext_resource path="res://assets/go.png" type="Texture" id=2]
+[ext_resource path="res://assets/2.png" type="Texture" id=3]
+[ext_resource path="res://assets/1.png" type="Texture" id=4]
+[ext_resource path="res://assets/3.png" type="Texture" id=5]
+[ext_resource path="res://assets/player-2-marker.png" type="Texture" id=6]
+[ext_resource path="res://assets/player-1-marker.png" type="Texture" id=7]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 470.051, 178.393 )
+script = ExtResource( 1 )
+
+[node name="big3" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+z_index = 10
+texture = ExtResource( 5 )
+
+[node name="big2" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+z_index = 10
+texture = ExtResource( 3 )
+
+[node name="big1" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+z_index = 10
+texture = ExtResource( 4 )
+
+[node name="go" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+z_index = 10
+texture = ExtResource( 2 )
+
+[node name="p1indicator" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+z_index = 1
+texture = ExtResource( 7 )
+
+[node name="p2indicator" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+z_index = 1
+texture = ExtResource( 6 )

@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/worldselect.gd" type="Script" id=1]
+[ext_resource path="res://assets/gravityportrait.png" type="Texture" id=2]
+[ext_resource path="res://assets/cursor.png" type="Texture" id=3]
+[ext_resource path="res://assets/second-chance-thumbnail.png" type="Texture" id=4]
+[ext_resource path="res://assets/moatportrait.png" type="Texture" id=5]
+[ext_resource path="res://uielements/mapfont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/musics/Polytrons_song_mk1.wav" type="AudioStream" id=7]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Gravity" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Second Chance" type="Sprite" parent="."]
+position = Vector2( 100, 0 )
+texture = ExtResource( 4 )
+
+[node name="Moat" type="Sprite" parent="."]
+position = Vector2( 200, 0 )
+texture = ExtResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 102, 50 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="Selector" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -94.5
+margin_top = -106.0
+margin_right = 332.5
+margin_bottom = -41.0
+custom_fonts/normal_font = ExtResource( 6 )
+text = "Select Your Map!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+mix_target = 2

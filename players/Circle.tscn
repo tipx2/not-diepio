@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/circlybubble.png" type="Texture" id=1]
+[ext_resource path="res://players/playersgdscript/Circle.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 31.4223
+
+[sub_resource type="Animation" id=2]
+resource_name = "Shooting"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/path = NodePath("Circle Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0 ]
+}
+
+[node name="Circle" type="KinematicBody2D"]
+position = Vector2( 756.56, 397.994 )
+rotation = -3.14159
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Circle Sprite" type="Sprite" parent="."]
+position = Vector2( 0.735779, -0.735779 )
+scale = Vector2( 0.977007, 0.977007 )
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.776, -0.775 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Shooting = SubResource( 2 )
+
+[node name="muzzle" type="Position2D" parent="."]
+position = Vector2( 50, 0 )

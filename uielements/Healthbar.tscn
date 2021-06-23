@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/greenbarbubble.png" type="Texture" id=1]
+[ext_resource path="res://assets/redbarbubble.png" type="Texture" id=2]
+[ext_resource path="res://uielements/Healthbar.gd" type="Script" id=3]
+
+[node name="HealthBar" type="Area2D"]
+script = ExtResource( 3 )
+
+[node name="HealthBarRed" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="HealthBarGreen" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 50, 5 )

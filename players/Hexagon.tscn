@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/hexagonshoot.png" type="Texture" id=1]
+[ext_resource path="res://players/playersgdscript/Hexagon.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Shooting"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hexagon Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.856756 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0 ]
+}
+
+[node name="Hexagon" type="KinematicBody2D"]
+rotation = -0.587693
+script = ExtResource( 2 )
+
+[node name="Hexagon Sprite" type="Sprite" parent="."]
+position = Vector2( 2.54788, 0 )
+rotation = -6.28318
+scale = Vector2( 0.920379, 1 )
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 2.55413, -0.202465 )
+scale = Vector2( 0.937565, 1 )
+polygon = PoolVector2Array( 0, -32, 31, -17, 31, 17, 0, 32, -30, 17, -30, -17 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Shooting = SubResource( 1 )
+
+[node name="muzzle" type="Position2D" parent="."]
+position = Vector2( 22.0793, -0.746471 )
+rotation = -0.0794542
