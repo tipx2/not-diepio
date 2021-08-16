@@ -113,11 +113,18 @@ func checkChangeScene():
 		if map == "res://maps/Second Chance.tscn":
 			camera.zoom = Vector2(1.5,1.5)
 		map = load(map).instance()
+		scene.map = map
+		scene.player1 = 'res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn'
+		scene.player2 = 'res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn'
+		scene.player1obj = player1choice
+		scene.player2obj = player2choice
 		player1choice.changeControls(1, map.get_node("player1start").position)
 		player2choice.changeControls(2, map.get_node("player2start").position)
 		scene.set_countdown_pos([map.get_node('countdownpos').position.x, map.get_node('countdownpos').position.y])
 		scene.set_player_pos([map.get_node("player1start").position.x, map.get_node("player1start").position.y], [map.get_node("player2start").position.x, map.get_node("player2start").position.y])
 		scene.add_child(camera)
+		player1choice.connect("died", scene, "handle_death2")
+		player2choice.connect("died", scene, "handle_death1")
 		scene.add_child(player1choice)
 		scene.add_child(player2choice)
 		scene.add_child(map)

@@ -1,18 +1,28 @@
 extends Node2D
 
-var start = false
 var countdown_pos = []
 var p1pos = []
 var p2pos = []
+var p1score = 0
+var p2score = 0
+var start = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+# These will be given from playerselect.gd
+var map = null
+var player1 = null
+var player2 = null
+var player1obj = null
+var player2obj = null
+
+func countdown():
 	var big3 = get_node('big3')
 	var big2 = get_node('big2')
 	var big1 = get_node('big1')
 	var go = get_node('go')
 	var p1indicator = get_node('p1indicator')
 	var p2indicator = get_node('p2indicator')
+	p1indicator.visible = true
+	p2indicator.visible = true
 	p1indicator.position.x = p1pos[0]
 	p1indicator.position.y = p1pos[1]
 	p2indicator.position.x = p2pos[0]
@@ -32,22 +42,101 @@ func _ready():
 	big3.visible = true
 	t.start()
 	yield(t, "timeout")
-	big3.queue_free()
+	big3.visible = false
 	big2.visible = true
 	t.start()
 	yield(t, "timeout")
-	big2.queue_free()
+	big2.visible = false
 	big1.visible = true
 	t.start()
 	yield(t, "timeout")
-	big1.queue_free()
+	big1.visible = false
 	go.visible = true
 	t.start()
 	yield(t, "timeout")
-	go.queue_free()
+	go.visible = false
 	p1indicator.visible = false
 	p2indicator.visible = false
 	start = true
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var p1score_node = get_node('p1score')
+	var p2score_node = get_node('p2score')
+	var camera = get_node('Camera2D')
+	
+	var topLeft = camera.get_camera_screen_center() - camera.get_viewport_rect().size / 2 
+	var topRight = camera.get_camera_screen_center() + camera.get_viewport_rect().size / 2 
+
+	p1score_node.position.x = topLeft[0]+65
+	p1score_node.position.y = topLeft[1]+37
+	
+	p2score_node.position.x = topRight[0]-65
+	p2score_node.position.y = topLeft[1]+37
+	
+	countdown()
+
+func respawn():
+	start = false
+	player1obj.healthbar.queue_free()
+	player1obj.queue_free()
+	
+	player2obj.healthbar.queue_free()
+	player2obj.queue_free()
+	
+	player1obj = load(player1).instance()
+	player2obj = load(player2).instance()
+	
+	add_child(player1obj)
+	add_child(player2obj)
+	
+	player1obj.changeControls(1, map.get_node("player1start").position)
+	player2obj.changeControls(2, map.get_node("player2start").position)
+	
+	player1obj.connect("died", self, "handle_death2")
+	player2obj.connect("died", self, "handle_death1")
+	
+	set_player_pos([map.get_node("player1start").position.x, map.get_node("player1start").position.y], [map.get_node("player2start").position.x, map.get_node("player2start").position.y])
+	
+	countdown()
+	
+func handle_death1():
+	var p1score_node = get_node('p1score')
+	p1score += 1
+	if p1score == 1:
+		p1score_node.get_node("AnimationPlayer").play("onePoint")
+		respawn()
+	else:
+		#theywin
+		player2obj.healthbar.queue_free()
+		player2obj.queue_free()
+		p1score_node.get_node("AnimationPlayer").play("twoPoint")
+		
+		var t = Timer.new()
+		t.set_one_shot(true)
+		self.add_child(t)
+		t.set_wait_time(5)
+		t.start()
+		yield(t, "timeout")
+	
+func handle_death2():
+	var p2score_node = get_node('p2score')
+	p2score += 1
+	if p2score == 1:
+		p2score_node.get_node("AnimationPlayer").play("onePoint")
+		respawn()
+	else:
+		#theywin
+		player1obj.healthbar.queue_free()
+		player1obj.queue_free()
+		p2score_node.get_node("AnimationPlayer").play("twoPoint")
+		
+		var t = Timer.new()
+		t.set_one_shot(true)
+		self.add_child(t)
+		t.set_wait_time(5)
+		t.start()
+		yield(t, "timeout")
 
 func set_countdown_pos(pos):
 	countdown_pos = pos
@@ -55,6 +144,8 @@ func set_countdown_pos(pos):
 func set_player_pos(pos1, pos2):
 	p1pos = pos1
 	p2pos = pos2
+	player1obj.position = Vector2(pos1[0], pos1[1])
+	player2obj.position = Vector2(pos2[0], pos2[1])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

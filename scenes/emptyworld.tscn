@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/emptyworld.gd" type="Script" id=1]
 [ext_resource path="res://assets/go.png" type="Texture" id=2]
@@ -7,6 +7,67 @@
 [ext_resource path="res://assets/3.png" type="Texture" id=5]
 [ext_resource path="res://assets/player-2-marker.png" type="Texture" id=6]
 [ext_resource path="res://assets/player-1-marker.png" type="Texture" id=7]
+[ext_resource path="res://assets/PointCounter.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "onePoint"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "twoPoint"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "onePoint"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "twoPoint"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5, 6 ]
+}
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 470.051, 178.393 )
@@ -45,3 +106,22 @@ texture = ExtResource( 7 )
 scale = Vector2( 2, 2 )
 z_index = 1
 texture = ExtResource( 6 )
+
+[node name="p1score" type="Sprite" parent="."]
+scale = Vector2( -2, 2 )
+texture = ExtResource( 8 )
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="p1score"]
+anims/onePoint = SubResource( 1 )
+anims/twoPoint = SubResource( 3 )
+
+[node name="p2score" type="Sprite" parent="."]
+position = Vector2( 107, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="p2score"]
+anims/onePoint = SubResource( 2 )
+anims/twoPoint = SubResource( 4 )
