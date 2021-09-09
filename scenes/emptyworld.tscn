@@ -24,7 +24,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "twoPoint"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -39,8 +39,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5, 6 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "onePoint"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -114,7 +113,7 @@ hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="p1score"]
 anims/onePoint = SubResource( 1 )
-anims/twoPoint = SubResource( 3 )
+anims/twoPoint = SubResource( 2 )
 
 [node name="p2score" type="Sprite" parent="."]
 position = Vector2( 107, 0 )
@@ -123,5 +122,5 @@ texture = ExtResource( 8 )
 hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="p2score"]
-anims/onePoint = SubResource( 2 )
+anims/onePoint = SubResource( 3 )
 anims/twoPoint = SubResource( 4 )

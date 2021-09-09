@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var Bullet = preload('res://bullets/SquareBullet.tscn')
 var HealthBar = preload('res://uielements/Healthbar.tscn')
+signal died
 
 var healthbar = HealthBar.instance()
 
@@ -33,8 +34,7 @@ func get_input():
 func _physics_process(delta):
 	if get_parent().start:
 		if health <= 0:
-			healthbar.queue_free()
-			queue_free()
+			emit_signal("died")
 		get_input()
 		rotation += rotation_dir * rotation_speed * delta
 		motion = move_and_slide(motion)

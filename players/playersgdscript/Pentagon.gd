@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var Bullet = preload('res://bullets/PentagonBullet.tscn')
 var HealthBar = preload('res://uielements/Healthbar.tscn')
+signal died
 
 var healthbar = HealthBar.instance()
 
@@ -33,8 +34,7 @@ func get_input():
 func _physics_process(delta):
 	if get_parent().start:
 		if health <= 0:
-			healthbar.queue_free()
-			queue_free()
+			emit_signal("died")
 		get_input()
 		rotation += rotation_dir * rotation_speed * delta
 		motion = move_and_slide(motion)
@@ -42,7 +42,7 @@ func _physics_process(delta):
 
 		if Input.is_action_just_pressed(controls[4]):
 			visible = true
-			if just_shot >= 50:
+			if just_shot >= 40:
 				just_shot = 0
 				$AnimationPlayer.play('Shooting')
 				var t = Timer.new()

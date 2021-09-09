@@ -19,12 +19,17 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		var body = collision.collider
-		if body.get('health') == null and bounced < 3:
+		if body.get('health') == null and bounced < 2:
 			velocity = velocity.bounce(collision.normal)
 			bounced += 1
 		elif body.get('health') != null and body.get_instance_id() != shot_from:
-			body.health -= 6
 			queue_free()
+			body.health -= 6
+			if body.name == \"Pentagon\":
+				body.visible = true
+				body.get_node(\"AnimationPlayer\").play(\"Vanishing\")
+				yield(body.get_node(\"AnimationPlayer\"), \"animation_finished\")
+				body.visible = false
 		else:
 			queue_free()
 "
