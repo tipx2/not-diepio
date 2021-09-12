@@ -31,6 +31,13 @@ func get_input():
 	if Input.is_action_pressed(controls[0]):
 		motion = Vector2(speed, 0).rotated(rotation)
 
+func disappear():
+	visible = true
+	$AnimationPlayer.stop(true)
+	$AnimationPlayer.play("Vanishing")
+	yield(get_node("AnimationPlayer"), "animation_finished")
+	visible = false
+
 func _physics_process(delta):
 	if get_parent().start:
 		if health <= 0:
@@ -41,7 +48,6 @@ func _physics_process(delta):
 
 
 		if Input.is_action_just_pressed(controls[4]):
-			visible = true
 			if just_shot >= 40:
 				just_shot = 0
 				$AnimationPlayer.play('Shooting')
@@ -53,9 +59,7 @@ func _physics_process(delta):
 				yield(t, "timeout")
 				t.queue_free()
 				shoot()
-			$AnimationPlayer.play("Vanishing")
-			yield(get_node("AnimationPlayer"), "animation_finished")
-			visible = false
+			disappear()
 
 		just_shot += 1
 		move_and_slide(motion)
