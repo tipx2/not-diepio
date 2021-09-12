@@ -10,7 +10,6 @@ func _on_Area2D_body_entered(body):
 	if body.get('health') and body.get_instance_id() != shot_from:
 		queue_free()
 		body.health -= 4
-		print(body.name)
 		if "Pentagon" in body.name:
 			body.disappear()
 	elif body.get_instance_id() != shot_from:
