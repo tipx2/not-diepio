@@ -10,7 +10,10 @@ func _on_bullet_body_entered(body):
 	if body.get('health') and body.get_instance_id() != shot_from:
 		queue_free()
 		body.health -= 8
-		if "Pentagon" in body.name:
-			body.disappear()
+		if body.name == "Pentagon":
+			body.visible = true
+			body.get_node("AnimationPlayer").play("Vanishing")
+			yield(body.get_node("AnimationPlayer"), "animation_finished")
+			body.visible = false
 	elif body.get_instance_id() != shot_from:
 		queue_free()
