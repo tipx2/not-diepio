@@ -24,9 +24,10 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 627.457, 492.226 )
-scale = Vector2( 4.41611, 5.01968 )
+position = Vector2( 368.549, 282.689 )
+scale = Vector2( 0.927364, 0.986505 )
 z_index = -1
+z_as_relative = false
 texture = ExtResource( 1 )
 
 [node name="player1start" type="Position2D" parent="."]

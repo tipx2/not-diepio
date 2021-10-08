@@ -108,17 +108,28 @@ func handle_death1():
 		respawn()
 	else:
 		#theywin
+		#thank you fireguy for that comment
 		player2obj.healthbar.queue_free()
 		player2obj.queue_free()
 		p1score_node.get_node("AnimationPlayer").play("twoPoint")
-		
 		var t = Timer.new()
 		t.set_one_shot(true)
 		self.add_child(t)
 		t.set_wait_time(5)
 		t.start()
 		yield(t, "timeout")
-	
+		
+		var regex = RegEx.new()
+		regex.compile("@(.+)@")
+		var result = regex.search(player1obj.name)
+		if result:
+			var big_shape_name = result.get_strings()[1]
+			get_node('winAvatar').texture = load("res://Large Portraits/" + big_shape_name + "-big.png")
+			get_node("winBackground").visible = true
+			get_node("winAvatar").visible = true
+			get_node("winForeground").visible = true
+			
+			
 func handle_death2():
 	var p2score_node = get_node('p2score')
 	p2score += 1
@@ -127,6 +138,7 @@ func handle_death2():
 		respawn()
 	else:
 		#theywin
+		#thanks aryeh for that comment
 		player1obj.healthbar.queue_free()
 		player1obj.queue_free()
 		p2score_node.get_node("AnimationPlayer").play("twoPoint")
