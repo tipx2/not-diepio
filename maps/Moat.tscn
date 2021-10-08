@@ -38,3 +38,9 @@ position = Vector2( 768.111, 450.272 )
 
 [node name="countdownpos" type="Position2D" parent="."]
 position = Vector2( 544.644, 116.38 )
+
+[node name="leftwincount" type="Position2D" parent="."]
+position = Vector2( -133.492, 0 )
+
+[node name="rightwincount" type="Position2D" parent="."]
+position = Vector2( 1177.82, -2.11893 )

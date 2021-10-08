@@ -1,6 +1,8 @@
 extends Node2D
 
 var countdown_pos = []
+var leftwin_pos = []
+var rightwin_pos = []
 var p1pos = []
 var p2pos = []
 var p1score = 0
@@ -68,11 +70,8 @@ func _ready():
 	var topLeft = camera.get_camera_screen_center() - camera.get_viewport_rect().size / 2 
 	var topRight = camera.get_camera_screen_center() + camera.get_viewport_rect().size / 2 
 
-	p1score_node.position.x = topLeft[0]+65
-	p1score_node.position.y = topLeft[1]+37
-	
-	p2score_node.position.x = topRight[0]-65
-	p2score_node.position.y = topLeft[1]+37
+	p1score_node.position = leftwin_pos
+	p2score_node.position = rightwin_pos
 	
 	countdown()
 
@@ -112,10 +111,11 @@ func handle_death1():
 		player2obj.healthbar.queue_free()
 		player2obj.queue_free()
 		p1score_node.get_node("AnimationPlayer").play("twoPoint")
+		
 		var t = Timer.new()
 		t.set_one_shot(true)
 		self.add_child(t)
-		t.set_wait_time(5)
+		t.set_wait_time(1)
 		t.start()
 		yield(t, "timeout")
 		
@@ -124,12 +124,16 @@ func handle_death1():
 		var result = regex.search(player1obj.name)
 		if result:
 			var big_shape_name = result.get_strings()[1]
+			var camera = get_node('Camera2D')
+			var middle = camera.get_camera_screen_center()
 			get_node('winAvatar').texture = load("res://Large Portraits/" + big_shape_name + "-big.png")
+			get_node("winBackground").position = middle
+			var scale = get_viewport().size.x / get_node("winBackground").texture.get_size().x * 2
+			get_node("winBackground").set_scale(Vector2(scale, scale))
 			get_node("winBackground").visible = true
 			get_node("winAvatar").visible = true
 			get_node("winForeground").visible = true
-			
-			
+				
 func handle_death2():
 	var p2score_node = get_node('p2score')
 	p2score += 1
@@ -146,9 +150,24 @@ func handle_death2():
 		var t = Timer.new()
 		t.set_one_shot(true)
 		self.add_child(t)
-		t.set_wait_time(5)
+		t.set_wait_time(1)
 		t.start()
 		yield(t, "timeout")
+		
+		var regex = RegEx.new()
+		regex.compile("@(.+)@")
+		var result = regex.search(player2obj.name)
+		if result:
+			var big_shape_name = result.get_strings()[1]
+			var camera = get_node('Camera2D')
+			var middle = camera.get_camera_screen_center()
+			get_node('winAvatar').texture = load("res://Large Portraits/" + big_shape_name + "-big.png")
+			get_node("winBackground").position = middle
+			var scale = get_viewport().size.x / get_node("winBackground").texture.get_size().x * 2
+			get_node("winBackground").set_scale(Vector2(scale, scale))
+			get_node("winBackground").visible = true
+			get_node("winAvatar").visible = true
+			get_node("winForeground").visible = true
 
 func set_countdown_pos(pos):
 	countdown_pos = pos
@@ -158,6 +177,10 @@ func set_player_pos(pos1, pos2):
 	p2pos = pos2
 	player1obj.position = Vector2(pos1[0], pos1[1])
 	player2obj.position = Vector2(pos2[0], pos2[1])
+
+func set_wincount_pos(leftwin, rightwin):
+	leftwin_pos = leftwin
+	rightwin_pos = rightwin
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

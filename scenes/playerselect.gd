@@ -121,6 +121,7 @@ func checkChangeScene():
 		player1choice.changeControls(1, map.get_node("player1start").position)
 		player2choice.changeControls(2, map.get_node("player2start").position)
 		scene.set_countdown_pos([map.get_node('countdownpos').position.x, map.get_node('countdownpos').position.y])
+		scene.set_wincount_pos(map.get_node('leftwincount').position, map.get_node('rightwincount').position)
 		scene.set_player_pos([map.get_node("player1start").position.x, map.get_node("player1start").position.y], [map.get_node("player2start").position.x, map.get_node("player2start").position.y])
 		scene.add_child(camera)
 		player1choice.connect("died", scene, "handle_death2")

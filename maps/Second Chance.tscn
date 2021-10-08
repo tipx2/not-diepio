@@ -28,7 +28,7 @@ __meta__ = {
 
 [node name="Sprite4" type="Sprite" parent="."]
 self_modulate = Color( 1, 0.501961, 0.643137, 1 )
-position = Vector2( 585.388, 454.118 )
+position = Vector2( 537.511, 277.729 )
 scale = Vector2( 104.962, 65.3746 )
 z_index = -1
 texture = ExtResource( 3 )
@@ -41,3 +41,9 @@ position = Vector2( 539.896, -88.7242 )
 
 [node name="countdownpos" type="Position2D" parent="."]
 position = Vector2( 543.008, 286.938 )
+
+[node name="leftwincount" type="Position2D" parent="."]
+position = Vector2( -147.998, -210.27 )
+
+[node name="rightwincount" type="Position2D" parent="."]
+position = Vector2( 1250, -210.27 )

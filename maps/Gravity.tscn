@@ -34,3 +34,9 @@ rotation = 3.14159
 
 [node name="countdownpos" type="Position2D" parent="."]
 position = Vector2( 480.418, 290.671 )
+
+[node name="leftwincount" type="Position2D" parent="."]
+position = Vector2( -171.785, -26.4285 )
+
+[node name="rightwincount" type="Position2D" parent="."]
+position = Vector2( 1138.31, -26.4285 )
