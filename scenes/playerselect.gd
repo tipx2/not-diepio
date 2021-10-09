@@ -11,10 +11,6 @@ onready var p2con = $player2select
 
 onready var players = [[$Triangle, $Circle, $Hexagon, $Pentagon, $Square], [$Sprite4, $Sprite5]]
 
-func _ready():
-	p1con.visible = false
-	p2con.visible = false
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed('right1'):
@@ -82,27 +78,29 @@ func _process(_delta):
 	$p2selector.position.y = p2cursor[1]*100
 	
 	if Input.is_action_just_pressed('shoot1'):
-		p1con.visible = true
-		player1choice = load('res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn')
-		player1choice = player1choice.instance()
-		player1chosen = true
-		checkChangeScene()
+		p1con.text = "Player 1 has confirmed!"
+		if "Sprite" in players[p1cursor[1]][p1cursor[0]].name:
+			p1con.text = "That character is in development"
+		else:
+			player1choice = load('res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn')
+			player1choice = player1choice.instance()
+			player1chosen = true
+			checkChangeScene()
+		$player1select/p1boxanim.play("flash1")
 	
 	if Input.is_action_just_pressed('shoot2'):
-		p2con.visible = true
-		player2choice = load('res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn')
-		player2choice = player2choice.instance()
-		player2chosen = true
-		checkChangeScene()
+		p2con.text = "Player 2 has confirmed!"
+		if "Sprite" in players[p2cursor[1]][p2cursor[0]].name:
+			p2con.text = "That character is in development"
+		else:
+			player2choice = load('res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn')
+			player2choice = player2choice.instance()
+			player2chosen = true
+			checkChangeScene()
+		$player2select/p2boxanim.play("flash2")
 	
 func checkChangeScene():
 	if player1chosen and player2chosen:
-		var t = Timer.new()
-		t.set_wait_time(2)
-		t.set_one_shot(true)
-		self.add_child(t)
-		t.start()
-		yield(t, "timeout")
 		$Camera2D.current = false
 		var map = ''
 		for node in get_children():
@@ -131,7 +129,6 @@ func checkChangeScene():
 		scene.add_child(map)
 		scene.global_position = global_position
 		get_parent().add_child(scene)
-		t.queue_free()
 		queue_free()
 
 

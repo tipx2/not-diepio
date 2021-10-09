@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/playerselect.gd" type="Script" id=2]
@@ -17,9 +17,41 @@
 size = 15
 font_data = ExtResource( 7 )
 
+[sub_resource type="Animation" id=3]
+resource_name = "flash2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.517647, 0.14902, 1 ), Color( 1, 0.894118, 0.811765, 1 ), Color( 1, 0.858824, 0.74902, 1 ), Color( 1, 0.517647, 0.14902, 1 ) ]
+}
+
 [sub_resource type="DynamicFont" id=2]
 size = 15
 font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "flash1"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.14902, 0.454902, 1 ), Color( 1, 0.666667, 0.788235, 1 ), Color( 1, 0.619608, 0.756863, 1 ), Color( 1, 0.14902, 0.454902, 1 ) ]
+}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -81,24 +113,26 @@ margin_top = 110.0
 margin_right = 452.0
 margin_bottom = 186.0
 custom_fonts/normal_font = SubResource( 1 )
-text = "Player 2 has 
-confirmed!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="p2boxanim" type="AnimationPlayer" parent="player2select"]
+anims/flash2 = SubResource( 3 )
+
 [node name="player1select" type="RichTextLabel" parent="."]
 self_modulate = Color( 1, 0.14902, 0.454902, 1 )
-margin_left = 194.887
+margin_left = 163.0
 margin_top = 110.0
-margin_right = 315.887
-margin_bottom = 163.0
+margin_right = 299.0
+margin_bottom = 186.0
 custom_fonts/normal_font = SubResource( 2 )
-text = "Player 1 has
-confirmed!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="p1boxanim" type="AnimationPlayer" parent="player1select"]
+anims/flash1 = SubResource( 4 )
 
 [node name="Map" type="Node" parent="."]
 
@@ -115,5 +149,4 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
-
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
