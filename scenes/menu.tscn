@@ -98,5 +98,6 @@ action_mode = 0
 text = " Quit "
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Quit" to="." method="_on_Quit_pressed"]

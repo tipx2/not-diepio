@@ -130,19 +130,16 @@ anims/twoPoint = SubResource( 4 )
 [node name="winBackground" type="Sprite" parent="."]
 visible = false
 position = Vector2( 484, 423.472 )
-scale = Vector2( 29.783, 19.9399 )
 z_index = 2
 texture = ExtResource( 9 )
 
 [node name="winAvatar" type="Sprite" parent="."]
 visible = false
 position = Vector2( 450, 250 )
-scale = Vector2( 7, 7 )
 z_index = 3
 
 [node name="winForeground" type="Sprite" parent="."]
 visible = false
 position = Vector2( 484, 400 )
-scale = Vector2( 23, 23 )
 z_index = 4
 texture = ExtResource( 11 )

@@ -17,7 +17,7 @@
 size = 15
 font_data = ExtResource( 7 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "flash2"
 length = 0.3
 tracks/0/type = "value"
@@ -33,7 +33,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0.517647, 0.14902, 1 ), Color( 1, 0.894118, 0.811765, 1 ), Color( 1, 0.858824, 0.74902, 1 ), Color( 1, 0.517647, 0.14902, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 15
 font_data = ExtResource( 7 )
 
@@ -118,7 +118,7 @@ __meta__ = {
 }
 
 [node name="p2boxanim" type="AnimationPlayer" parent="player2select"]
-anims/flash2 = SubResource( 3 )
+anims/flash2 = SubResource( 2 )
 
 [node name="player1select" type="RichTextLabel" parent="."]
 self_modulate = Color( 1, 0.14902, 0.454902, 1 )
@@ -126,7 +126,7 @@ margin_left = 163.0
 margin_top = 110.0
 margin_right = 299.0
 margin_bottom = 186.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,4 +149,5 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

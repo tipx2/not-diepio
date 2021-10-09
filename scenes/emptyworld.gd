@@ -83,6 +83,10 @@ func respawn():
 	player2obj.healthbar.queue_free()
 	player2obj.queue_free()
 	
+	for node in get_children():
+		if 'bullet' in node.name.to_lower():
+			node.queue_free()
+	
 	player1obj = load(player1).instance()
 	player2obj = load(player2).instance()
 	
@@ -128,11 +132,24 @@ func handle_death1():
 			var middle = camera.get_camera_screen_center()
 			get_node('winAvatar').texture = load("res://Large Portraits/" + big_shape_name + "-big.png")
 			get_node("winBackground").position = middle
-			var scale = get_viewport().size.x / get_node("winBackground").texture.get_size().x * 2
-			get_node("winBackground").set_scale(Vector2(scale, scale))
+			get_node("winAvatar").position = middle
+			get_node("winForeground").position = middle
+			print(get_node("winForeground").position)
+			get_node("winForeground").position.y += 200 * camera.zoom.y
+			var scalex = camera.get_viewport().size.x / get_node("winBackground").texture.get_size().x
+			var scaley = camera.get_viewport().size.y / get_node("winBackground").texture.get_size().y
+			get_node("winBackground").scale = Vector2(scalex, scaley) * camera.zoom
 			get_node("winBackground").visible = true
+			get_node("winAvatar").scale = 5 * camera.zoom
 			get_node("winAvatar").visible = true
+			get_node("winForeground").scale = 15 * camera.zoom
 			get_node("winForeground").visible = true
+			t.set_wait_time(5)
+			t.start()
+			yield(t, "timeout")
+			var scene = load('res://scenes/menu.tscn').instance()
+			get_parent().add_child(scene)
+			queue_free()
 				
 func handle_death2():
 	var p2score_node = get_node('p2score')
@@ -163,11 +180,24 @@ func handle_death2():
 			var middle = camera.get_camera_screen_center()
 			get_node('winAvatar').texture = load("res://Large Portraits/" + big_shape_name + "-big.png")
 			get_node("winBackground").position = middle
-			var scale = get_viewport().size.x / get_node("winBackground").texture.get_size().x * 2
-			get_node("winBackground").set_scale(Vector2(scale, scale))
+			get_node("winAvatar").position = middle
+			get_node("winForeground").position = middle
+			print(get_node("winForeground").position)
+			get_node("winForeground").position.y += 200 * camera.zoom.y
+			var scalex = camera.get_viewport().size.x / get_node("winBackground").texture.get_size().x
+			var scaley = camera.get_viewport().size.y / get_node("winBackground").texture.get_size().y
+			get_node("winBackground").scale = Vector2(scalex, scaley) * camera.zoom
 			get_node("winBackground").visible = true
+			get_node("winAvatar").scale = 5 * camera.zoom
 			get_node("winAvatar").visible = true
+			get_node("winForeground").scale = 15 * camera.zoom
 			get_node("winForeground").visible = true
+			t.set_wait_time(5)
+			t.start()
+			yield(t, "timeout")
+			var scene = load('res://scenes/menu.tscn').instance()
+			get_parent().add_child(scene)
+			queue_free()
 
 func set_countdown_pos(pos):
 	countdown_pos = pos
