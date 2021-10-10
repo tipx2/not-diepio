@@ -10,11 +10,11 @@ var p2score = 0
 var start = false
 
 # These will be given from playerselect.gd
-var map = null
-var player1 = null
-var player2 = null
-var player1obj = null
-var player2obj = null
+var map
+var player1
+var player2
+var player1obj
+var player2obj
 
 func countdown():
 	var big3 = get_node('big3')
@@ -61,32 +61,7 @@ func countdown():
 	p2indicator.visible = false
 	start = true
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var p1score_node = get_node('p1score')
-	var p2score_node = get_node('p2score')
-	var camera = get_node('Camera2D')
-	
-	var topLeft = camera.get_camera_screen_center() - camera.get_viewport_rect().size / 2 
-	var topRight = camera.get_camera_screen_center() + camera.get_viewport_rect().size / 2 
-
-	p1score_node.position = leftwin_pos
-	p2score_node.position = rightwin_pos
-	
-	countdown()
-
-func respawn():
-	start = false
-	player1obj.healthbar.queue_free()
-	player1obj.queue_free()
-	
-	player2obj.healthbar.queue_free()
-	player2obj.queue_free()
-	
-	for node in get_children():
-		if 'bullet' in node.name.to_lower():
-			node.queue_free()
-	
+func spawn():
 	player1obj = load(player1).instance()
 	player2obj = load(player2).instance()
 	
@@ -102,8 +77,35 @@ func respawn():
 	set_player_pos([map.get_node("player1start").position.x, map.get_node("player1start").position.y], [map.get_node("player2start").position.x, map.get_node("player2start").position.y])
 	
 	countdown()
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var p1score_node = get_node('p1score')
+	var p2score_node = get_node('p2score')
+	var camera = get_node('Camera2D')
+	
+	var topLeft = camera.get_camera_screen_center() - camera.get_viewport_rect().size / 2 
+	var topRight = camera.get_camera_screen_center() + camera.get_viewport_rect().size / 2 
+	
+	spawn()
+	
+	p1score_node.position = leftwin_pos
+	p2score_node.position = rightwin_pos
+
+func respawn():
+	start = false
+	player1obj.healthbar.queue_free()
+	player1obj.queue_free()
+	
+	player2obj.healthbar.queue_free()
+	player2obj.queue_free()
+	
+	spawn()
 	
 func handle_death1():
+	for node in get_children():
+		if 'bullet' in node.name.to_lower():
+			node.queue_free()
 	var p1score_node = get_node('p1score')
 	p1score += 1
 	if p1score == 1:
@@ -123,10 +125,14 @@ func handle_death1():
 		t.start()
 		yield(t, "timeout")
 		
+		var search = player1obj.name
 		var regex = RegEx.new()
+		if not '@' in search:
+			search = '@' + search + '@'
 		regex.compile("@(.+)@")
-		var result = regex.search(player1obj.name)
+		var result = regex.search(search)
 		if result:
+			print('alright')
 			var big_shape_name = result.get_strings()[1]
 			var camera = get_node('Camera2D')
 			var middle = camera.get_camera_screen_center()
@@ -134,7 +140,6 @@ func handle_death1():
 			get_node("winBackground").position = middle
 			get_node("winAvatar").position = middle
 			get_node("winForeground").position = middle
-			print(get_node("winForeground").position)
 			get_node("winForeground").position.y += 200 * camera.zoom.y
 			var scalex = camera.get_viewport().size.x / get_node("winBackground").texture.get_size().x
 			var scaley = camera.get_viewport().size.y / get_node("winBackground").texture.get_size().y
@@ -152,6 +157,9 @@ func handle_death1():
 			queue_free()
 				
 func handle_death2():
+	for node in get_children():
+		if 'bullet' in node.name.to_lower():
+			node.queue_free()
 	var p2score_node = get_node('p2score')
 	p2score += 1
 	if p2score == 1:
@@ -171,9 +179,12 @@ func handle_death2():
 		t.start()
 		yield(t, "timeout")
 		
+		var search = player2obj.name
 		var regex = RegEx.new()
+		if not '@' in search:
+			search = '@' + search + '@'
 		regex.compile("@(.+)@")
-		var result = regex.search(player2obj.name)
+		var result = regex.search(search)
 		if result:
 			var big_shape_name = result.get_strings()[1]
 			var camera = get_node('Camera2D')
@@ -182,7 +193,6 @@ func handle_death2():
 			get_node("winBackground").position = middle
 			get_node("winAvatar").position = middle
 			get_node("winForeground").position = middle
-			print(get_node("winForeground").position)
 			get_node("winForeground").position.y += 200 * camera.zoom.y
 			var scalex = camera.get_viewport().size.x / get_node("winBackground").texture.get_size().x
 			var scaley = camera.get_viewport().size.y / get_node("winBackground").texture.get_size().y

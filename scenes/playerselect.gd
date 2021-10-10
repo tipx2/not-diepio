@@ -6,6 +6,8 @@ var player1chosen = false
 var player2chosen = false
 var player1choice = false
 var player2choice = false
+var player1name = ''
+var player2name = ''
 onready var p1con = $player1select
 onready var p2con = $player2select
 
@@ -80,24 +82,26 @@ func _process(_delta):
 	if Input.is_action_just_pressed('shoot1'):
 		p1con.text = "Player 1 has confirmed!"
 		if "Sprite" in players[p1cursor[1]][p1cursor[0]].name:
-			p1con.text = "That character is in development"
+			$p1big.texture = load("res://Large Portraits/icon-big.png")
+			p1con.text = "Pick someone else"
 			player1chosen = false
 		else:
-			player1choice = load('res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn')
-			player1choice = player1choice.instance()
+			player1name = 'res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn'
 			player1chosen = true
+			$p1big.texture = load("res://Large Portraits/" + players[p1cursor[1]][p1cursor[0]].name + "-big.png")
 			checkChangeScene()
 		$player1select/p1boxanim.play("flash1")
 	
 	if Input.is_action_just_pressed('shoot2'):
 		p2con.text = "Player 2 has confirmed!"
 		if "Sprite" in players[p2cursor[1]][p2cursor[0]].name:
-			p2con.text = "That character is in development"
+			$p2big.texture = load("res://Large Portraits/icon-big.png")
+			p2con.text = "Pick someone else"
 			player2chosen = false
 		else:
-			player2choice = load('res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn')
-			player2choice = player2choice.instance()
+			player2name = 'res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn'
 			player2chosen = true
+			$p2big.texture = load("res://Large Portraits/" + players[p2cursor[1]][p2cursor[0]].name + "-big.png")
 			checkChangeScene()
 		$player2select/p2boxanim.play("flash2")
 	
@@ -114,20 +118,11 @@ func checkChangeScene():
 			camera.zoom = Vector2(1.5,1.5)
 		map = load(map).instance()
 		scene.map = map
-		scene.player1 = 'res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn'
-		scene.player2 = 'res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn'
-		scene.player1obj = player1choice
-		scene.player2obj = player2choice
-		player1choice.changeControls(1, map.get_node("player1start").position)
-		player2choice.changeControls(2, map.get_node("player2start").position)
+		scene.player1 = player1name
+		scene.player2 = player2name
 		scene.set_countdown_pos([map.get_node('countdownpos').position.x, map.get_node('countdownpos').position.y])
 		scene.set_wincount_pos(map.get_node('leftwincount').position, map.get_node('rightwincount').position)
-		scene.set_player_pos([map.get_node("player1start").position.x, map.get_node("player1start").position.y], [map.get_node("player2start").position.x, map.get_node("player2start").position.y])
 		scene.add_child(camera)
-		player1choice.connect("died", scene, "handle_death2")
-		player2choice.connect("died", scene, "handle_death1")
-		scene.add_child(player1choice)
-		scene.add_child(player2choice)
 		scene.add_child(map)
 		scene.global_position = global_position
 		get_parent().add_child(scene)

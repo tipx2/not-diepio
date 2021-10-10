@@ -106,12 +106,24 @@ z_index = 1
 texture = ExtResource( 3 )
 offset = Vector2( 5, 0 )
 
+[node name="p1big" type="Sprite" parent="."]
+position = Vector2( 50, -70 )
+region_enabled = true
+region_rect = Rect2( -11.08, -0.775, 140, 79.257 )
+region_filter_clip = true
+
+[node name="p2big" type="Sprite" parent="."]
+position = Vector2( 320, -70 )
+region_enabled = true
+region_rect = Rect2( -11.08, -0.775, 140, 79.257 )
+region_filter_clip = true
+
 [node name="player2select" type="RichTextLabel" parent="."]
 self_modulate = Color( 1, 0.517647, 0.14902, 1 )
-margin_left = 316.0
-margin_top = 110.0
-margin_right = 452.0
-margin_bottom = 186.0
+margin_left = 210.0
+margin_top = -44.0
+margin_right = 441.0
+margin_bottom = -16.0
 custom_fonts/normal_font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -122,10 +134,10 @@ anims/flash2 = SubResource( 2 )
 
 [node name="player1select" type="RichTextLabel" parent="."]
 self_modulate = Color( 1, 0.14902, 0.454902, 1 )
-margin_left = 163.0
-margin_top = 110.0
-margin_right = 299.0
-margin_bottom = 186.0
+margin_left = -50.0
+margin_top = -44.0
+margin_right = 181.0
+margin_bottom = -16.0
 custom_fonts/normal_font = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
