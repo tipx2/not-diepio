@@ -81,6 +81,7 @@ func _process(_delta):
 		p1con.text = "Player 1 has confirmed!"
 		if "Sprite" in players[p1cursor[1]][p1cursor[0]].name:
 			p1con.text = "That character is in development"
+			player1chosen = false
 		else:
 			player1choice = load('res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn')
 			player1choice = player1choice.instance()
@@ -92,6 +93,7 @@ func _process(_delta):
 		p2con.text = "Player 2 has confirmed!"
 		if "Sprite" in players[p2cursor[1]][p2cursor[0]].name:
 			p2con.text = "That character is in development"
+			player2chosen = false
 		else:
 			player2choice = load('res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn')
 			player2choice = player2choice.instance()
