@@ -89,7 +89,8 @@ func _process(_delta):
 			player1name = 'res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn'
 			player1chosen = true
 			$p1big.texture = load("res://Large Portraits/" + players[p1cursor[1]][p1cursor[0]].name + "-big.png")
-		$player1select/p1boxanim.play("flash1")
+		$WordFlasher.play("flash1")
+		$PicFlasher.play("picflash1")
 	
 	if Input.is_action_just_pressed('shoot2'):
 		p2con.text = "Player 2 has confirmed!"
@@ -101,7 +102,8 @@ func _process(_delta):
 			player2name = 'res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn'
 			player2chosen = true
 			$p2big.texture = load("res://Large Portraits/" + players[p2cursor[1]][p2cursor[0]].name + "-big.png")
-		$player2select/p2boxanim.play("flash2")
+		$WordFlasher.play("flash2")
+		$PicFlasher.play("picflash2")
 	
 func checkChangeScene():
 	if player1chosen and player2chosen:

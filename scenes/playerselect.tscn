@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/playerselect.gd" type="Script" id=2]
@@ -17,31 +17,19 @@
 size = 15
 font_data = ExtResource( 7 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "flash2"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0.517647, 0.14902, 1 ), Color( 1, 0.894118, 0.811765, 1 ), Color( 1, 0.858824, 0.74902, 1 ), Color( 1, 0.517647, 0.14902, 1 ) ]
-}
-
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 15
 font_data = ExtResource( 7 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "flash1"
-length = 0.35
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "picflash1"
+length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:self_modulate")
+tracks/0/path = NodePath("p1big:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -50,14 +38,59 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 0.14902, 0.454902, 1 ), Color( 1, 0.666667, 0.788235, 1 ), Color( 1, 0.619608, 0.756863, 1 ), Color( 1, 0.14902, 0.454902, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
-size = 20
-font_data = ExtResource( 7 )
+[sub_resource type="Animation" id=8]
+resource_name = "picflash2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("p2big:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "flash1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("player1select:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.14902, 0.454902, 1 ), Color( 1, 0, 0.360784, 0.666667 ), Color( 1, 0, 0.364706, 1 ), Color( 1, 0.14902, 0.454902, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "flash2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("player2select:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.517647, 0.14902, 1 ), Color( 1, 0.435294, 0, 0.666667 ), Color( 1, 0.431373, 0, 1 ), Color( 1, 0.517647, 0.14902, 1 ) ]
+}
 
 [node name="Node2D" type="Node2D"]
+self_modulate = Color( 1, 0.517647, 0.14902, 1 )
 script = ExtResource( 2 )
 
 [node name="Triangle" type="Sprite" parent="."]
@@ -125,17 +158,14 @@ region_filter_clip = true
 
 [node name="player2select" type="RichTextLabel" parent="."]
 self_modulate = Color( 1, 0.517647, 0.14902, 1 )
-margin_left = 210.0
+margin_left = 212.0
 margin_top = -44.0
-margin_right = 441.0
+margin_right = 443.0
 margin_bottom = -16.0
 custom_fonts/normal_font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="p2boxanim" type="AnimationPlayer" parent="player2select"]
-anims/flash2 = SubResource( 2 )
 
 [node name="player1select" type="RichTextLabel" parent="."]
 self_modulate = Color( 1, 0.14902, 0.454902, 1 )
@@ -143,13 +173,10 @@ margin_left = -50.0
 margin_top = -44.0
 margin_right = 181.0
 margin_bottom = -16.0
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="p1boxanim" type="AnimationPlayer" parent="player1select"]
-anims/flash1 = SubResource( 4 )
 
 [node name="Map" type="Node" parent="."]
 
@@ -168,7 +195,7 @@ margin_left = 112.07
 margin_top = 150.561
 margin_right = 278.07
 margin_bottom = 186.561
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Ready"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -177,6 +204,14 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
+
+[node name="PicFlasher" type="AnimationPlayer" parent="."]
+anims/picflash1 = SubResource( 7 )
+anims/picflash2 = SubResource( 8 )
+
+[node name="WordFlasher" type="AnimationPlayer" parent="."]
+anims/flash1 = SubResource( 9 )
+anims/flash2 = SubResource( 10 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
