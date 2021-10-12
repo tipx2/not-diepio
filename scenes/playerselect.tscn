@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/playerselect.gd" type="Script" id=2]
@@ -21,11 +21,18 @@ font_data = ExtResource( 7 )
 size = 15
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 20
 font_data = ExtResource( 7 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="InputEventKey" id=4]
+resource_local_to_scene = true
+scancode = 32
+
+[sub_resource type="ShortCut" id=5]
+shortcut = SubResource( 4 )
+
+[sub_resource type="Animation" id=6]
 resource_name = "picflash1"
 length = 0.3
 tracks/0/type = "value"
@@ -41,7 +48,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "picflash2"
 length = 0.3
 tracks/0/type = "value"
@@ -57,7 +64,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.666667 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "flash1"
 length = 0.3
 tracks/0/type = "value"
@@ -73,7 +80,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0.14902, 0.454902, 1 ), Color( 1, 0, 0.360784, 0.666667 ), Color( 1, 0, 0.364706, 1 ), Color( 1, 0.14902, 0.454902, 1 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "flash2"
 length = 0.3
 tracks/0/type = "value"
@@ -195,7 +202,8 @@ margin_left = 112.07
 margin_top = 150.561
 margin_right = 278.07
 margin_bottom = 186.561
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
+shortcut = SubResource( 5 )
 text = "Ready"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -206,12 +214,11 @@ stream = ExtResource( 10 )
 autoplay = true
 
 [node name="PicFlasher" type="AnimationPlayer" parent="."]
-anims/picflash1 = SubResource( 7 )
-anims/picflash2 = SubResource( 8 )
+anims/picflash1 = SubResource( 6 )
+anims/picflash2 = SubResource( 7 )
 
 [node name="WordFlasher" type="AnimationPlayer" parent="."]
-anims/flash1 = SubResource( 9 )
-anims/flash2 = SubResource( 10 )
-
+anims/flash1 = SubResource( 8 )
+anims/flash2 = SubResource( 9 )
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
