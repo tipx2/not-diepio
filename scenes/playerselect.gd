@@ -89,7 +89,6 @@ func _process(_delta):
 			player1name = 'res://players/' + players[p1cursor[1]][p1cursor[0]].name + '.tscn'
 			player1chosen = true
 			$p1big.texture = load("res://Large Portraits/" + players[p1cursor[1]][p1cursor[0]].name + "-big.png")
-			checkChangeScene()
 		$player1select/p1boxanim.play("flash1")
 	
 	if Input.is_action_just_pressed('shoot2'):
@@ -102,7 +101,6 @@ func _process(_delta):
 			player2name = 'res://players/' + players[p2cursor[1]][p2cursor[0]].name + '.tscn'
 			player2chosen = true
 			$p2big.texture = load("res://Large Portraits/" + players[p2cursor[1]][p2cursor[0]].name + "-big.png")
-			checkChangeScene()
 		$player2select/p2boxanim.play("flash2")
 	
 func checkChangeScene():
@@ -135,3 +133,7 @@ func _on_Button_pressed():
 	scene.global_position = global_position
 	get_parent().add_child(scene)
 	queue_free()
+
+
+func _on_Button2_pressed():
+	checkChangeScene()

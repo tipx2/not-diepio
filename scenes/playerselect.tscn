@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/playerselect.gd" type="Script" id=2]
@@ -52,6 +52,10 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 0.14902, 0.454902, 1 ), Color( 1, 0.666667, 0.788235, 1 ), Color( 1, 0.619608, 0.756863, 1 ), Color( 1, 0.14902, 0.454902, 1 ) ]
 }
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 7 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -114,6 +118,7 @@ region_filter_clip = true
 
 [node name="p2big" type="Sprite" parent="."]
 position = Vector2( 320, -70 )
+scale = Vector2( -1, 1 )
 region_enabled = true
 region_rect = Rect2( -11.08, -0.775, 140, 79.257 )
 region_filter_clip = true
@@ -158,8 +163,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Button2" type="Button" parent="."]
+margin_left = 112.07
+margin_top = 150.561
+margin_right = 278.07
+margin_bottom = 186.561
+custom_fonts/font = SubResource( 5 )
+text = "Ready"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
