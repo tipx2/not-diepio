@@ -59,6 +59,8 @@ func countdown():
 	go.visible = false
 	p1indicator.visible = false
 	p2indicator.visible = false
+	if p1score == 0 and p2score == 0:
+		map.get_node("AudioStreamPlayer").play(0.0)
 	start = true
 
 func spawn():

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/moat-song.wav-ba4228b1e12a17b825f7b2c386f7d368.sample"
+
+[deps]
+
+source_file="res://assets/musics/moat-song.wav"
+dest_files=[ "res://.import/moat-song.wav-ba4228b1e12a17b825f7b2c386f7d368.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

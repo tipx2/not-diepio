@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/second chance song (1).wav-305d4625fdd5c1c53a65472e93484286.sample"
+
+[deps]
+
+source_file="res://assets/musics/second chance song (1).wav"
+dest_files=[ "res://.import/second chance song (1).wav-305d4625fdd5c1c53a65472e93484286.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
