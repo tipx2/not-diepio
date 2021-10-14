@@ -26,5 +26,6 @@ func _on_Play_pressed():
 	self.add_child(t)
 	t.start()
 	yield(t, "timeout")
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://scenes/worldselect.tscn")
 	queue_free()

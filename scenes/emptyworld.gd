@@ -111,6 +111,16 @@ func handle_death1():
 	var p1score_node = get_node('p1score')
 	p1score += 1
 	if p1score == 1:
+#		var explosionFX = load("res://VFX/explosion.tscn").instance()
+#		explosionFX.transform = player2obj.transform
+#		add_child(explosionFX)
+#		explosionFX.emitting = true
+#		var t = Timer.new()
+#		t.set_one_shot(true)
+#		self.add_child(t)
+#		t.set_wait_time(1)
+#		t.start()
+#		yield(t, "timeout")
 		p1score_node.get_node("AnimationPlayer").play("onePoint")
 		respawn()
 	else:
