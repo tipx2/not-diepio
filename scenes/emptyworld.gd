@@ -62,8 +62,10 @@ func countdown():
 	if p1score == 0 and p2score == 0:
 		map.get_node("AudioStreamPlayer").play(0.0)
 	start = true
+	t.queue_free()
 
 func spawn():
+	start = false
 	player1obj = load(player1).instance()
 	player2obj = load(player2).instance()
 	
@@ -93,46 +95,42 @@ func _ready():
 	
 	p1score_node.position = leftwin_pos
 	p2score_node.position = rightwin_pos
-
-func respawn():
-	start = false
-	player1obj.healthbar.queue_free()
-	player1obj.queue_free()
+	
+func handle_death1():
+	var explosionFX = load("res://VFX/explosion.tscn").instance()
+	explosionFX.transform = player2obj.transform
+	add_child(explosionFX)
+	explosionFX.emitting = true
 	
 	player2obj.healthbar.queue_free()
 	player2obj.queue_free()
 	
-	spawn()
-	
-func handle_death1():
 	for node in get_children():
 		if 'bullet' in node.name.to_lower():
 			node.queue_free()
 	var p1score_node = get_node('p1score')
 	p1score += 1
+	
+	var t = Timer.new()
+	t.set_one_shot(true)
+	self.add_child(t)
+	
 	if p1score == 1:
-#		var explosionFX = load("res://VFX/explosion.tscn").instance()
-#		explosionFX.transform = player2obj.transform
-#		add_child(explosionFX)
-#		explosionFX.emitting = true
-#		var t = Timer.new()
-#		t.set_one_shot(true)
-#		self.add_child(t)
-#		t.set_wait_time(1)
-#		t.start()
-#		yield(t, "timeout")
 		p1score_node.get_node("AnimationPlayer").play("onePoint")
-		respawn()
+		
+		t.set_wait_time(3)
+		t.start()
+		yield(t, "timeout")
+		
+		player1obj.healthbar.queue_free()
+		player1obj.queue_free()
+		
+		spawn()
 	else:
 		#theywin
 		#thank you fireguy for that comment
-		player2obj.healthbar.queue_free()
-		player2obj.queue_free()
 		p1score_node.get_node("AnimationPlayer").play("twoPoint")
 		
-		var t = Timer.new()
-		t.set_one_shot(true)
-		self.add_child(t)
 		t.set_wait_time(1)
 		t.start()
 		yield(t, "timeout")
@@ -144,7 +142,6 @@ func handle_death1():
 		regex.compile("@(.+)@")
 		var result = regex.search(search)
 		if result:
-			print('alright')
 			var big_shape_name = result.get_strings()[1]
 			var camera = get_node('Camera2D')
 			var middle = camera.get_camera_screen_center()
@@ -169,24 +166,40 @@ func handle_death1():
 			queue_free()
 				
 func handle_death2():
+	var explosionFX = load("res://VFX/explosion.tscn").instance()
+	explosionFX.transform = player1obj.transform
+	add_child(explosionFX)
+	explosionFX.emitting = true
+	
+	player1obj.healthbar.queue_free()
+	player1obj.queue_free()
+	
 	for node in get_children():
 		if 'bullet' in node.name.to_lower():
 			node.queue_free()
 	var p2score_node = get_node('p2score')
 	p2score += 1
+	
+	var t = Timer.new()
+	t.set_one_shot(true)
+	self.add_child(t)
+	
 	if p2score == 1:
 		p2score_node.get_node("AnimationPlayer").play("onePoint")
-		respawn()
+		
+		t.set_wait_time(3)
+		t.start()
+		yield(t, "timeout")
+		
+		player2obj.healthbar.queue_free()
+		player2obj.queue_free()
+		
+		spawn()
 	else:
 		#theywin
 		#thanks aryeh for that comment
-		player1obj.healthbar.queue_free()
-		player1obj.queue_free()
 		p2score_node.get_node("AnimationPlayer").play("twoPoint")
 		
-		var t = Timer.new()
-		t.set_one_shot(true)
-		self.add_child(t)
 		t.set_wait_time(1)
 		t.start()
 		yield(t, "timeout")

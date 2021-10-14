@@ -34,7 +34,6 @@ color_ramp = SubResource( 2 )
 [node name="Particles2D" type="Particles2D"]
 emitting = false
 amount = 100
-lifetime = 0.7
 one_shot = true
 speed_scale = 4.0
 randomness = 1.0

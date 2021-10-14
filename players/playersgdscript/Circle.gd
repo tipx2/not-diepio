@@ -35,6 +35,7 @@ func _physics_process(delta):
 	if get_parent().start:
 		if health <= 0:
 			emit_signal("died")
+			
 		get_input()
 		rotation += rotation_dir * rotation_speed * delta
 		motion = move_and_slide(motion)
