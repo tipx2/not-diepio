@@ -38,7 +38,7 @@ func _physics_process(delta):
 		get_input()
 		rotation += rotation_dir * rotation_speed * delta
 		motion = move_and_slide(motion)
-
+		
 		
 		if Input.is_action_pressed(controls[4]):
 			if just_shot >= 50:
