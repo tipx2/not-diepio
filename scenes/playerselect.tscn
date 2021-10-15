@@ -155,14 +155,14 @@ offset = Vector2( 5, 0 )
 [node name="p1big" type="Sprite" parent="."]
 position = Vector2( 50, -70 )
 region_enabled = true
-region_rect = Rect2( -11.08, -0.775, 140, 79.257 )
+region_rect = Rect2( -11.08, -0.775, 140, 96.775 )
 region_filter_clip = true
 
 [node name="p2big" type="Sprite" parent="."]
 position = Vector2( 320, -70 )
 scale = Vector2( -1, 1 )
 region_enabled = true
-region_rect = Rect2( -11.08, -0.775, 140, 79.257 )
+region_rect = Rect2( -11.08, -0.775, 140, 96.775 )
 region_filter_clip = true
 
 [node name="player2select" type="RichTextLabel" parent="."]
