@@ -25,6 +25,7 @@ func countdown():
 	var p2indicator = get_node('p2indicator')
 	p1indicator.visible = true
 	p2indicator.visible = true
+	#note: change the below code to do pxindicator.position = (pxpos[0], pxpos[1]) for all the repeated lines
 	p1indicator.position.x = p1pos[0]
 	p1indicator.position.y = p1pos[1]
 	p2indicator.position.x = p2pos[0]
@@ -146,10 +147,13 @@ func handle_death1():
 			var camera = get_node('Camera2D')
 			var middle = camera.get_camera_screen_center()
 			get_node('winAvatar').texture = load("res://Large Portraits/" + big_shape_name + "-big.png")
+#fix winbanner
+#			get_node("winBanner").texture = load("res://assets/player1banner.png")
 			get_node("winBackground").position = middle
 			get_node("winAvatar").position = middle
 			get_node("winForeground").position = middle
 			get_node("winForeground").position.y += 200 * camera.zoom.y
+#			get_node("winBanner").position = middle
 			var scalex = camera.get_viewport().size.x / get_node("winBackground").texture.get_size().x
 			var scaley = camera.get_viewport().size.y / get_node("winBackground").texture.get_size().y
 			get_node("winBackground").scale = Vector2(scalex, scaley) * camera.zoom
@@ -158,6 +162,8 @@ func handle_death1():
 			get_node("winAvatar").visible = true
 			get_node("winForeground").scale = 15 * camera.zoom
 			get_node("winForeground").visible = true
+#			get_node("winBanner").scale = 15 * camera.zoom
+#			get_node("winBanner").visible = true
 			t.set_wait_time(5)
 			t.start()
 			yield(t, "timeout")

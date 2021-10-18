@@ -143,3 +143,5 @@ visible = false
 position = Vector2( 484, 400 )
 z_index = 4
 texture = ExtResource( 11 )
+
+[node name="winBanner" type="Sprite" parent="."]
